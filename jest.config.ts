@@ -19,11 +19,11 @@ export default {
   // Indicates whether the coverage information should be collected while executing the test
   roots: ['<rootDir>/src'],
   collectCoverage: true,
-  collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
+  testRegex: ['(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?|ts?)?$'],
   coverageDirectory: 'coverage',
   testEnvironment: 'node',
   transform: {
-    '+.\\.ts$': 'ts-jest'
+    '^.\\.ts$': 'ts-jest'
   }
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
