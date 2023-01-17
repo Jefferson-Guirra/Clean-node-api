@@ -1,7 +1,8 @@
 {
     "*.{js,jsx,ts,tsx}": [
-        "eslint --fix",
+        "eslint 'src/**' --fix",
         "npm run test:staged",
-        "git add"
+        "git add",
+        "jest --findRelatedTests"
       ]
 }
