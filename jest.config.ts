@@ -17,11 +17,15 @@ export default {
   // clearMocks: false,
 
   // Indicates whether the coverage information should be collected while executing the test
+  roots: ['<rootDir>/src'],
+  collectCoverage: true,
+  collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
+  coverageDirectory: 'coverage',
   testEnvironment: 'node',
   transform: {
     '^.+\\.ts?$': 'ts-jest'
-  }
-
+  },
+  coveragePathIgnorePatterns: ['<rootDir>/coverage', '/node_modules/']
   // An array of glob patterns indicating a set of files for which coverage information should be collected
   // collectCoverageFrom: undefined,
 

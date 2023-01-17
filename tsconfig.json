@@ -13,6 +13,7 @@
       
     },
     "exclude": ["coverage", "**/__tests__"]
+
   }
   
   
