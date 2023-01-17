@@ -1,5 +1,4 @@
-import { MissingParamsError } from '../errors/missing-params-error'
-import { InvalidParamsError } from '../errors/invalid-params-error'
+import { InvalidParamsError, MissingParamsError } from '../errors'
 import { HttpRequest, HttpResponse } from '../protocols/http'
 import { badRequest, serverError } from '../helpers/http-helper'
 import { Controller } from '../protocols/controller'
