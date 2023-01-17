@@ -4,6 +4,7 @@ import { HttpRequest, HttpResponse } from '../protocols/http'
 import { badRequest } from '../helpers/http-helper'
 import { Controller } from '../protocols/controller'
 import { EmailValidator } from '../protocols/email-validator'
+import { ServerError } from '../errors/server-error'
 
 export class SignUpController implements Controller {
   private readonly emailValidator: EmailValidator
@@ -13,15 +14,22 @@ export class SignUpController implements Controller {
   }
 
   handle (httpRequest: HttpRequest): HttpResponse | undefined {
-    const requiredFields = ['name', 'email', 'password', 'passwordConfirmation']
-    for (const field of requiredFields) {
-      if (!httpRequest.body[field]) {
-        return badRequest(new MissingParamsError(field))
+    try {
+      const requiredFields = ['name', 'email', 'password', 'passwordConfirmation']
+      for (const field of requiredFields) {
+        if (!httpRequest.body[field]) {
+          return badRequest(new MissingParamsError(field))
+        }
       }
-    }
-    const isValid = this.emailValidator.isvalid(httpRequest.body.email)
-    if (!isValid) {
-      return badRequest(new InvalidParamsError('email'))
+      const isValid = this.emailValidator.isvalid(httpRequest.body.email)
+      if (!isValid) {
+        return badRequest(new InvalidParamsError('email'))
+      }
+    } catch (err) {
+      return {
+        statusCode: 500,
+        body: new ServerError()
+      }
     }
   }
 }
