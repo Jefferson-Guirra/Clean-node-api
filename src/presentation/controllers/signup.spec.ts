@@ -38,6 +38,7 @@ describe('SignUp Controller', () => {
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new MissingParamsError('name'))
   })
+
   test('Should return 400 if no email is provided', () => {
     const { sut } = makeSut()
     const httpRequest = {
@@ -51,6 +52,7 @@ describe('SignUp Controller', () => {
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new MissingParamsError('email'))
   })
+
   test('Should return 400 if no password is provided', () => {
     const { sut } = makeSut()
     const httpRequest = {
@@ -64,6 +66,7 @@ describe('SignUp Controller', () => {
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new MissingParamsError('password'))
   })
+
   test('Should return 400 if no password confirmation is provided', () => {
     const { sut } = makeSut()
     const httpRequest = {
@@ -77,6 +80,7 @@ describe('SignUp Controller', () => {
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new MissingParamsError('passwordConfirmation'))
   })
+
   test('Should return 400 if an invalid email is provided', () => {
     const { sut, emailValidatorStub } = makeSut()
     jest.spyOn(emailValidatorStub, 'isvalid').mockReturnValueOnce(false)
@@ -91,5 +95,20 @@ describe('SignUp Controller', () => {
     const httpResponse = sut.handle(httpRequest) as HttpResponse
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new InvalidParamsError('email'))
+  })
+
+  test('Should call EmailValidator with correct email', () => {
+    const { sut, emailValidatorStub } = makeSut()
+    const isValidSpy = jest.spyOn(emailValidatorStub, 'isvalid')
+    const httpRequest = {
+      body: {
+        name: 'any_name',
+        email: 'any@mail.com',
+        password: 'any_password',
+        passwordConfirmation: 'any_password'
+      }
+    }
+    sut.handle(httpRequest) as HttpResponse
+    expect(isValidSpy).toBeCalledWith('any@mail.com')
   })
 })
