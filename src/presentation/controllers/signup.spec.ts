@@ -16,15 +16,6 @@ const makeEmailValidator = (): EmailValidator => {
   return new EmailValidatorStub()
 }
 
-const makeEmailValidatorWithError = (): EmailValidator => {
-  class EmailValidatorStub implements EmailValidator {
-    isvalid (email: string): boolean {
-      throw new Error()
-    }
-  }
-  return new EmailValidatorStub()
-}
-
 const makeSut = (): SutTypes => {
   const emailValidatorStub = makeEmailValidator()
   const sut = new SignUpController(emailValidatorStub)
@@ -122,20 +113,21 @@ describe('SignUp Controller', () => {
     sut.handle(httpRequest) as HttpResponse
     expect(isValidSpy).toBeCalledWith('any@mail.com')
   })
-})
-
-test('Should return 500 if EmailValidator throws', () => {
-  const emailValidatorStub = makeEmailValidatorWithError()
-  const sut = new SignUpController(emailValidatorStub)
-  const httpRequest = {
-    body: {
-      name: 'any_name',
-      email: 'anny@mail.com',
-      password: 'any_password',
-      passwordConfirmation: 'any_password'
+  test('Should return 500 if EmailValidator throws', () => {
+    const { sut, emailValidatorStub } = makeSut()
+    jest.spyOn(emailValidatorStub, 'isvalid').mockImplementationOnce(() => {
+      throw new Error()
+    })
+    const httpRequest = {
+      body: {
+        name: 'any_name',
+        email: 'anny@mail.com',
+        password: 'any_password',
+        passwordConfirmation: 'any_password'
+      }
     }
-  }
-  const httpResponse = sut.handle(httpRequest) as HttpResponse
-  expect(httpResponse.statusCode).toBe(500)
-  expect(httpResponse.body).toEqual(new ServerError())
+    const httpResponse = sut.handle(httpRequest) as HttpResponse
+    expect(httpResponse.statusCode).toBe(500)
+    expect(httpResponse.body).toEqual(new ServerError())
+  })
 })
