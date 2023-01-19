@@ -3,7 +3,7 @@ import { Encrypter, AccountModel, AddAccountRepository } from './db-add-account-
 
 const makeEncrypter = (): Encrypter => {
   class EncrypterStub implements Encrypter {
-    async encrypter (value: string): Promise<string> {
+    async encrypt (value: string): Promise<string> {
       return await Promise.resolve('hashed_password')
     }
   }
@@ -44,7 +44,7 @@ const makeSut = (): SutTypes => {
 describe('DbAddAccount UseCase', () => {
   test('Should call Encrypter with correct password', async () => {
     const { encrypterStub, sut } = makeSut()
-    const spyEncrypterStub = jest.spyOn(encrypterStub, 'encrypter')
+    const spyEncrypterStub = jest.spyOn(encrypterStub, 'encrypt')
     const account: AccountModel = {
       name: 'valid_name',
       email: 'valid_email',
@@ -56,7 +56,7 @@ describe('DbAddAccount UseCase', () => {
 
   test('Should throw if Encrypter throws', async () => {
     const { encrypterStub, sut } = makeSut()
-    jest.spyOn(encrypterStub, 'encrypter').mockReturnValueOnce(Promise.reject(new Error()))
+    jest.spyOn(encrypterStub, 'encrypt').mockReturnValueOnce(Promise.reject(new Error()))
     const account: AccountModel = {
       name: 'valid_name',
       email: 'valid_email',
