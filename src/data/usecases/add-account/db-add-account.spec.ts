@@ -1,5 +1,5 @@
 import { DbAddAccount } from './db-add-account'
-import { Encrypter, AccountModel, AddAccountRepository } from './db-add-account-protocols'
+import { Encrypter, AccountModel, AddAccountRepository, AddAccountModel } from './db-add-account-protocols'
 
 const makeEncrypter = (): Encrypter => {
   class EncrypterStub implements Encrypter {
@@ -18,7 +18,7 @@ interface SutTypes {
 
 const makeAddAccountRepository = (): AddAccountRepository => {
   class AddAccountRepositoryStub implements AddAccountRepository {
-    async add (accountData: AccountModel): Promise<AccountModel> {
+    async add (accountData: AddAccountModel): Promise<AccountModel> {
       const fakeAccount = {
         id: 'valid_id',
         name: 'valid_name',
@@ -48,7 +48,9 @@ describe('DbAddAccount UseCase', () => {
     const account: AccountModel = {
       name: 'valid_name',
       email: 'valid_email',
-      password: 'valid_password'
+      password: 'valid_password',
+      id: 'valid_id'
+
     }
     await sut.add(account)
     expect(spyEncrypterStub).toHaveBeenCalledWith('valid_password')
@@ -60,7 +62,8 @@ describe('DbAddAccount UseCase', () => {
     const account: AccountModel = {
       name: 'valid_name',
       email: 'valid_email',
-      password: 'valid_password'
+      password: 'valid_password',
+      id: 'valid_id'
     }
     const promise = sut.add(account)
     await expect(promise).rejects.toThrow()
@@ -95,7 +98,7 @@ describe('DbAddAccount UseCase', () => {
     await expect(promise).rejects.toThrow()
   })
 
-  test('should return an account if on sucess', async () => {
+  test('should return an account if on success', async () => {
     const { sut } = makeSut()
 
     const account = {
