@@ -1,8 +1,13 @@
-import app from './config/app'
+import env from './config/env'
+import { MongoHelper } from '../infra/db/mongodb/helpers/mongo-helper'
 
-app.listen(5050, () => {
-  function test (): void {
-    console.log('testando tsx')
-  }
-  test()
-})
+MongoHelper.connect(env.mongoUrl)
+  .then(async () => {
+    const app = (await import('./config/app')).default
+    app.listen(env.port, () => {
+      function test (): void {
+        console.log('testudo tsx')
+      }
+      test()
+    })
+  }).catch(console.error)
