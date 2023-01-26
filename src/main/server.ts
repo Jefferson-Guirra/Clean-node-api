@@ -5,9 +5,6 @@ MongoHelper.connect(env.mongoUrl)
   .then(async () => {
     const app = (await import('./config/app')).default
     app.listen(env.port, () => {
-      function test (): void {
-        console.log('testudo tsx')
-      }
-      test()
+      console.log('running in http://localhost:8080')
     })
   }).catch(console.error)
