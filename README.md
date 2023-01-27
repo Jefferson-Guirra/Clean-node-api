@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://expressjs.com/pt-br/" target="blank"><img src="signup.png" width="200" alt="Nest Logo" /></a>
+  <a href="https://expressjs.com/pt-br/" target="blank"><img src="signup.png" width="600" alt="Nest Logo" /></a>
 </p>
 
 ## Description
