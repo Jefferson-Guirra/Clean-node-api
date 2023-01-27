@@ -19,8 +19,15 @@
 Download the repository
 
 ```bash
+$ git clone https://github.com/Jefferson-Guirra/Clean-node-api.git
 
 ```
+Access the project folder
+
+```bash
+cd Clean-node-api
+```
+Install back-end dependencies
 
 ```bash
 $ npm run install
