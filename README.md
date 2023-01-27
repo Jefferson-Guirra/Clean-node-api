@@ -1,3 +1,6 @@
+<h1 align="center">
+  SignUp Api
+</h1>
 <p align="center">
   <a href="https://expressjs.com/pt-br/" target="blank"><img src="signup.png" width="1200" alt="Nest Logo" /></a>
 </p>
