@@ -24,7 +24,7 @@ $ npm start
 
 ### watch mode
 ```bash
-$ npm start:dev
+$ npm run start:dev
 ```
 
 ## Test
