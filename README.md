@@ -1,5 +1,5 @@
 <h1 align="center">
-<img src="https://skillicons.dev/icons?i=git" /> SignUp Api
+<img src="https://skillicons.dev/icons?i=express" /> SignUp Api
 </h1>
 <p align="center">
   <a href="https://expressjs.com/pt-br/" target="blank"><img src="signup.png" width="1200" alt="Nest Logo" /></a>
