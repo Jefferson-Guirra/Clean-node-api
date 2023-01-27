@@ -8,12 +8,12 @@ $ npm run install
 ```
 ## running app
 
-# development
+### development
 ```bash
 $ npm start
 ```
 
-# watch mode
+### watch mode
 ```bash
 $ npm start:dev
 ```
