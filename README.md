@@ -5,11 +5,22 @@
   <a href="https://expressjs.com/pt-br/" target="blank"><img src="signup.png" width="1200" alt="Nest Logo" /></a>
 </p>
 
-## Description
+## Technologies used
+- Nodejs
+- Express
+- Typescript
+- Mongodb
+- Bcrypt
+- Fast-glob
 
-[express](https://github.com/expressjs) framework TypeScript starter repository.
 
 ## Instalation
+
+Download the repository
+
+```bash
+
+```
 
 ```bash
 $ npm run install
