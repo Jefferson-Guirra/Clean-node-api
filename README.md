@@ -17,3 +17,18 @@ $ npm start
 ```bash
 $ npm start:dev
 ```
+
+##Test
+
+### Unit Test
+```bash
+$ npm run test:unit
+```
+### Integration Test
+```bash
+$ npm run test:integration
+```
+### Covarege Test
+```bash
+$ npm run test:ci
+```
