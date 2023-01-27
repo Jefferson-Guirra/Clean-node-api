@@ -27,7 +27,7 @@ Access the project folder
 ```bash
 cd Clean-node-api
 ```
-Install back-end dependencies
+Install dependencies
 
 ```bash
 $ npm run install
