@@ -37,7 +37,7 @@ $ npm run test:unit
 ```bash
 $ npm run test:integration
 ```
-### Covarege Test
+### Coverage Test
 ```bash
 $ npm run test:ci
 ```
