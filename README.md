@@ -41,3 +41,9 @@ $ npm run test:integration
 ```bash
 $ npm run test:ci
 ```
+
+## Stay in touch
+
+- Author - [Jefferson Guirra](https://www.linkedin.com/in/jefferson-guirra-developer/)
+- Website - [https://expressjs.com/](https://expressjs.com/
+- Twitter - [@ExpressJS](https://twitter.com/useexpressjs)
