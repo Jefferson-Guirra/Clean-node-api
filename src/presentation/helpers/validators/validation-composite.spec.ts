@@ -2,7 +2,7 @@ import { ValidationComposite } from './validation-composite'
 import { Validation } from './validation'
 import { InvalidParamsError } from '../../errors'
 
-const makeValidationStub = (): Validation => {
+const makeValidation = (): Validation => {
   class CompareFieldStub implements Validation {
     constructor (
       private readonly field: string,
@@ -16,22 +16,29 @@ const makeValidationStub = (): Validation => {
   return new CompareFieldStub('field', 'fieldToCompare')
 }
 interface SutTypes {
-  validationStub: Validation
-  sut: Validation
+  validationStubs: Validation[]
+  sut: ValidationComposite
 }
 const makeSut = (): SutTypes => {
-  const validationStub = makeValidationStub()
-  const sut = new ValidationComposite([validationStub])
+  const validationStubs = [makeValidation(), makeValidation()]
+  const sut = new ValidationComposite(validationStubs)
   return {
-    validationStub,
+    validationStubs,
     sut
   }
 }
 describe('ValidationComposite', () => {
   test('should return an error if any validation fails', () => {
-    const { sut, validationStub } = makeSut()
-    jest.spyOn(validationStub, 'validate').mockReturnValueOnce(new InvalidParamsError('field'))
+    const { sut, validationStubs } = makeSut()
+    jest.spyOn(validationStubs[1], 'validate').mockReturnValueOnce(new InvalidParamsError('field'))
     const error = sut.validate({ field: 'any_field' })
     expect(error).toEqual(new InvalidParamsError('field'))
+  })
+  test('should return the first error if more the one validation fails', () => {
+    const { sut, validationStubs } = makeSut()
+    jest.spyOn(validationStubs[0], 'validate').mockReturnValueOnce(new Error())
+    jest.spyOn(validationStubs[1], 'validate').mockReturnValueOnce(new InvalidParamsError('name'))
+    const error = sut.validate(validationStubs)
+    expect(error).toEqual(new Error())
   })
 })
