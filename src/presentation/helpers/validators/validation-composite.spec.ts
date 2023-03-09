@@ -41,4 +41,9 @@ describe('ValidationComposite', () => {
     const error = sut.validate(validationStubs)
     expect(error).toEqual(new Error())
   })
+  test('should not return Validation succeeds', () => {
+    const { sut, validationStubs } = makeSut()
+    const error = sut.validate(validationStubs)
+    expect(error).toBeFalsy()
+  })
 })
