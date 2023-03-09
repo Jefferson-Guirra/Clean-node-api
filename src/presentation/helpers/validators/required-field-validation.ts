@@ -1,5 +1,5 @@
 import { MissingParamsError } from '../../errors'
-import { Validation } from './validation'
+import { Validation } from '../../protocols/validation'
 
 export class RequiredFieldsValidation implements Validation {
   constructor (
