@@ -16,13 +16,14 @@ export class DbAuthentication implements Authentication {
 
   async auth (authentication: AuthenticationModel): Promise<string | null> {
     const account = await this.loadAccountByEmailRepository.load(authentication.email)
-    const validateAccount = account !== null && await this.hashComparer.compare(authentication.password, account.password)
-    if (validateAccount) {
-      const accessToken = await this.tokenGenerator.generate(account.id)
-      await this.updateAccessTokenRepository.update(account.id, accessToken)
-      return await Promise.resolve(accessToken)
-    } else {
-      return null
+    if (account !== null) {
+      const isValid = await this.hashComparer.compare(authentication.password, account.password)
+      if (isValid) {
+        const accessToken = await this.tokenGenerator.generate(account.id)
+        await this.updateAccessTokenRepository.update(account.id, accessToken)
+        return await Promise.resolve(accessToken)
+      }
     }
+    return null
   }
 }
