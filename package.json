@@ -22,6 +22,7 @@
     "@shelf/jest-mongodb": "^4.1.6",
     "@types/bcrypt": "^5.0.0",
     "@types/jest": "^29.2.5",
+    "@types/jsonwebtoken": "^9.0.2",
     "@types/node": "^18.11.18",
     "@types/supertest": "^2.0.12",
     "@types/validator": "^13.7.10",
@@ -41,6 +42,7 @@
     "bcrypt": "^5.1.0",
     "express": "^4.18.2",
     "fast-glob": "^3.2.12",
+    "jsonwebtoken": "^9.0.0",
     "mongodb": "^4.13.0",
     "validator": "^13.7.0"
   }
